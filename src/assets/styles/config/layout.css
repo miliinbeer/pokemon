@@ -1,0 +1,17 @@
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+main {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+@media (max-width: 600px) {
+  main {
+    height: auto;
+    flex-wrap: wrap-reverse;
+    gap: 25px;
+  }
+}

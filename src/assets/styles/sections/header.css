@@ -1,0 +1,26 @@
+.header {
+  height: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+}
+.header__title {
+  padding: 7px;
+  line-height: 112.682%;
+  text-transform: uppercase;
+  border: 1px #fff solid;
+}
+.header__info {
+  width: 143px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  line-height: 100%;
+}
+@media (max-width: 380px) {
+  .header {
+    height: 10vh;
+  }
+}
