@@ -6,6 +6,7 @@ interface Data {
   name: string;
   url: string;
 }
+
 // ↓ Типы данных вложенных элементов массива объектов из сервера для отрисовки информации
 interface Info {
   name: string;
