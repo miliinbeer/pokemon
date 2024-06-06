@@ -16,7 +16,7 @@ interface Info {
         base_stat: number;
     }>;
 }
-declare const data: Promise<any>;
+declare function showData(): Promise<any>;
 declare function showFirstCard(): Promise<void>;
 declare function showItems(): Promise<void>;
 declare function showInfo(el: Info): void;

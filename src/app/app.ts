@@ -17,17 +17,19 @@ interface Info {
   stats: Array<{ base_stat: number }>;
 }
 
-// ↓ Переменная с информацией из сервера
-const data = fetch("https://pokeapi.co/api/v2/pokemon?limit=10&offset=0")
-  .then((response) => response.json())
-  .then((el) => el.results);
+// ↓ Функция по отображению информацию из сервера
+function showData() {
+  const data = fetch("https://pokeapi.co/api/v2/pokemon?limit=10&offset=0")
+    .then((response) => response.json())
+    .then((el) => el.results);
+  return data;
+}
 
 // ↓ Функция по отображению информации первого элемента
 async function showFirstCard() {
-  const firstItem = await data;
+  const firstItem = await showData();
   firstItem.forEach((item: Data) => buttons.append(createButton(item)));
-  const info = firstItem[0].url;
-  fetch(info)
+  fetch(firstItem[0].url)
     .then((response) => response.json())
     .then((el) => showInfo(el));
 }
@@ -35,7 +37,7 @@ showFirstCard();
 
 // ↓ Функция по отображению информации по нажатию на кнопки
 async function showItems() {
-  const dataItems = await data;
+  const dataItems = await showData();
   const button = <NodeListOf<HTMLElement>>document.querySelectorAll(".button");
 
   dataItems.forEach(async (item: Data, index: any) => {
@@ -62,11 +64,10 @@ function showInfo(el: Info) {
        <p>Id: ${el.id}</p>
        <p>height: ${el.height}</p>
        <p>attack: ${el.stats[0].base_stat}</p>
-      </div>
-  `;
+      </div>`;
 }
 
-// ↓ Функция по созданию и отображению кнопок 
+// ↓ Функция по созданию и отображению кнопок
 function createButton(item: Data) {
   let button = document.createElement("div");
   button.innerHTML = `

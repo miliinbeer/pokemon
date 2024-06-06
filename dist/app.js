@@ -10,17 +10,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 const card = document.querySelector(".card");
 const buttons = document.querySelector(".buttons");
-// ↓ Переменная с информацией из сервера
-const data = fetch("https://pokeapi.co/api/v2/pokemon?limit=10&offset=0")
-    .then((response) => response.json())
-    .then((el) => el.results);
+// ↓ Функция по отображению информацию из сервера
+function showData() {
+    const data = fetch("https://pokeapi.co/api/v2/pokemon?limit=10&offset=0")
+        .then((response) => response.json())
+        .then((el) => el.results);
+    return data;
+}
 // ↓ Функция по отображению информации первого элемента
 function showFirstCard() {
     return __awaiter(this, void 0, void 0, function* () {
-        const firstItem = yield data;
+        const firstItem = yield showData();
         firstItem.forEach((item) => buttons.append(createButton(item)));
-        const info = firstItem[0].url;
-        fetch(info)
+        fetch(firstItem[0].url)
             .then((response) => response.json())
             .then((el) => showInfo(el));
     });
@@ -29,7 +31,7 @@ showFirstCard();
 // ↓ Функция по отображению информации по нажатию на кнопки
 function showItems() {
     return __awaiter(this, void 0, void 0, function* () {
-        const dataItems = yield data;
+        const dataItems = yield showData();
         const button = document.querySelectorAll(".button");
         dataItems.forEach((item, index) => __awaiter(this, void 0, void 0, function* () {
             const info = yield fetch(item.url)
@@ -53,10 +55,9 @@ function showInfo(el) {
        <p>Id: ${el.id}</p>
        <p>height: ${el.height}</p>
        <p>attack: ${el.stats[0].base_stat}</p>
-      </div>
-  `;
+      </div>`;
 }
-// ↓ Функция по созданию и отображению кнопок 
+// ↓ Функция по созданию и отображению кнопок
 function createButton(item) {
     let button = document.createElement("div");
     button.innerHTML = `
