@@ -40,7 +40,7 @@ async function showItems() {
   const dataItems = await showData();
   const button = <NodeListOf<HTMLElement>>document.querySelectorAll(".button");
 
-  dataItems.forEach(async (item: Data, index: any) => {
+  dataItems.forEach(async (item: Data, index: number) => {
     const info = await fetch(item.url)
       .then((response) => response.json())
       .then((el) => el);
@@ -74,4 +74,3 @@ function createButton(item: Data) {
   <button class="button">${item.name}</button>`;
   return button;
 }
-

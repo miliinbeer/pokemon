@@ -8,6 +8,7 @@
 }
 
 .button {
+  cursor: pointer;
   padding: 20px;
   color: #fff;
   font-size: 20px;
